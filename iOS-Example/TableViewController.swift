@@ -30,7 +30,7 @@ class TableViewController: UITableViewController, UINavigationControllerDelegate
         return GateAnimator(target: self)
         }()
     
-    var destinationViewController:UIViewController?
+    var destinationViewController:DetailsViewController?
     
     // MARK: - Lifecycle
     
@@ -107,7 +107,7 @@ class TableViewController: UITableViewController, UINavigationControllerDelegate
         let navigationBarHeight = navigationController?.navigationBar.frame.height ?? 0
         
         switch operation {
-        case .Push: return (destinationViewController as? DetailsViewController)?.textLabel.frame.rectByOffsetting(dx: 0, dy: navigationBarHeight + statusBarHeight + 4)
+        case .Push: return destinationViewController?.textLabel.frame.rectByOffsetting(dx: 0, dy: navigationBarHeight + statusBarHeight + 3)
         case .Pop:  return nil
         default:    return nil
         }
@@ -117,7 +117,7 @@ class TableViewController: UITableViewController, UINavigationControllerDelegate
         
         switch operation {
         case .Push: return (tableView.selectedCell as? TableViewCell)?.bottomTitleLabel
-        case .Pop:  return nil
+        case .Pop:  return destinationViewController?.textLabel
         default:    return nil
         }
     }
