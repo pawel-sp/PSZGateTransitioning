@@ -31,7 +31,7 @@ class TableViewController: UITableViewController, UINavigationControllerDelegate
         }()
     
     var destinationViewController:DetailsTableViewController?
-    var masterLabelFrame:CGRect?
+    var lastSelectedCell:TableViewCell?
     
     // MARK: - Lifecycle
     
@@ -62,10 +62,16 @@ class TableViewController: UITableViewController, UINavigationControllerDelegate
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as TableViewCell
+        let cell                   = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as TableViewCell
         cell.bottomTitleLabel.text = data[indexPath.row].text
-        cell.backgroundColor = data[indexPath.row].color
+        cell.backgroundColor       = data[indexPath.row].color
         return cell
+    }
+    
+    // MARK: - UITableViewDelegate
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        lastSelectedCell = tableView.cellForRowAtIndexPath(tableView.indexPathForSelectedRow()!) as? TableViewCell
     }
     
     // MARK: - UINavigationControllerDelegate
@@ -79,6 +85,22 @@ class TableViewController: UITableViewController, UINavigationControllerDelegate
             }
     }
     
+    // MARK: - Utilities
+    
+    var masterLabel:UILabel? {
+        return lastSelectedCell?.bottomTitleLabel
+    }
+    
+    var absoluteMasterLabelFrame:CGRect? {
+        if lastSelectedCell != nil {
+            return lastSelectedCell?.bottomTitleLabel.frame.rectByOffsetting(
+                dx: 0,
+                dy: lastSelectedCell!.frame.rectByOffsetting(dx: 0, dy: -tableView.contentOffset.y).origin.y
+            )
+        }
+        return nil
+    }
+    
     // MARK: - GateAnimatorDelegate
 
     func snapShotViewsFrameForGateAnimator(gateAnimator: GateAnimator) -> SnapshotViews {
@@ -87,14 +109,7 @@ class TableViewController: UITableViewController, UINavigationControllerDelegate
     
     func gateAnimator(gateAnimator:GateAnimator, animatedSubviewStartFrameForOperation operation:UINavigationControllerOperation) -> CGRect? {
         switch operation {
-        case .Push:
-            if let selectedCell = tableView.selectedCell as? TableViewCell {
-                masterLabelFrame = selectedCell.bottomTitleLabel.frame.rectByOffsetting(
-                    dx: 0,
-                    dy: selectedCell.frame.rectByOffsetting(dx: 0, dy: -tableView.contentOffset.y).origin.y
-                )
-            }
-            return masterLabelFrame
+        case .Push: return absoluteMasterLabelFrame
         case .Pop:  return destinationViewController?.colorNameAbsoluteFrame
         default:    return nil
         }
@@ -103,16 +118,24 @@ class TableViewController: UITableViewController, UINavigationControllerDelegate
     func gateAnimator(gateAnimator: GateAnimator, animatedSubviewDestinationFrameForOperation operation: UINavigationControllerOperation) -> CGRect? {
         switch operation {
         case .Push: return destinationViewController?.colorNameAbsoluteFrame
-        case .Pop:  return masterLabelFrame
+        case .Pop:  return absoluteMasterLabelFrame
         default:    return nil
         }
     }
     
     func gateAnimator(gateAnimator: GateAnimator, animatedSubviewForOperation operation: UINavigationControllerOperation) -> UIView? {
         switch operation {
-        case .Push: return (tableView.selectedCell as? TableViewCell)?.bottomTitleLabel
+        case .Push: return masterLabel
         case .Pop:  return destinationViewController?.colorName
         default:    return nil
+        }
+    }
+    
+    func gateAnimator(gateAnimator: GateAnimator, animationWillStartForOperation operation: UINavigationControllerOperation) {
+        switch operation {
+        case .Push: break
+        case .Pop:  break
+        default:    break
         }
     }
 }

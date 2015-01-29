@@ -14,6 +14,7 @@ public protocol GateAnimatorDelegate {
     
     func snapShotViewsFrameForGateAnimator(gateAnimator:GateAnimator) -> SnapshotViews
     
+    func gateAnimator(gateAnimator:GateAnimator, animationWillStartForOperation operation:UINavigationControllerOperation)
     func gateAnimator(gateAnimator:GateAnimator, animatedSubviewStartFrameForOperation operation:UINavigationControllerOperation) -> CGRect?
     func gateAnimator(gateAnimator:GateAnimator, animatedSubviewForOperation operation:UINavigationControllerOperation) -> UIView?
     func gateAnimator(gateAnimator:GateAnimator, animatedSubviewDestinationFrameForOperation operation:UINavigationControllerOperation) -> CGRect?

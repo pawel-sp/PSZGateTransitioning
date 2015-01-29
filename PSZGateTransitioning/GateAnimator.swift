@@ -40,14 +40,19 @@ public class GateAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     public func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
         
         // Properties
-        let containerView           = transitionContext.containerView()
-        let duration                = transitionDuration(transitionContext)
-        let toVC                    = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
-        let fromVC                  = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!
+        let containerView                             = transitionContext.containerView()
+        let duration                                  = transitionDuration(transitionContext)
+        let toVC                                      = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
+        let fromVC                                    = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!
+        let operation:UINavigationControllerOperation = reversedDirection ? .Pop : .Push
 
+        animatedSourceSubview                         = delegate.gateAnimator(self, animatedSubviewForOperation: operation)
+        
         // Setup
         toVC.view.alpha = 0
         containerView.insertSubview(toVC.view, belowSubview: fromVC.view)
+ 
+        
         
         if reversedDirection && snapshotViews != nil {
 
@@ -56,9 +61,8 @@ public class GateAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             let lowerSnapshotView = snapshotViews!.lowerSnapshotView
             
             // Setup
-            animatedSourceSubview         = delegate.gateAnimator(self, animatedSubviewForOperation: .Pop)
             animatedSourceSubviewSnapshot = animatedSourceSubview?.snapshotViewAfterScreenUpdates(false)
-            animatedSourceSubview?.alpha  = 0
+            //animatedSourceSubview?.alpha  = 0
             animatedSubviewDestinationFrame   = delegate.gateAnimator(self, animatedSubviewDestinationFrameForOperation: .Pop)
             
             if let frame = delegate.gateAnimator(self, animatedSubviewStartFrameForOperation: .Pop) {
@@ -74,21 +78,22 @@ public class GateAnimator: NSObject, UIViewControllerAnimatedTransitioning {
                 upperSnapshotView.removeFromSuperview()
                 lowerSnapshotView.removeFromSuperview()
                 self.animatedSourceSubviewSnapshot?.removeFromSuperview()
-                self.animatedDestinationView?.alpha = 1
+                self.delegate.gateAnimator(self, animatedSubviewForOperation: .Push)?.alpha = 1
                 transitionContext.completeTransition(!transitionContext.transitionWasCancelled())
             }
             
         } else {
 
             // Properties
-            animatedDestinationView           = delegate.gateAnimator(self, animatedSubviewForOperation: .Push)
-            animatedSourceSubview             = delegate.gateAnimator(self, animatedSubviewForOperation: .Push)
             animatedSourceSubview?.alpha      = 0
             snapshotViews                     = delegate.snapShotViewsFrameForGateAnimator(self)
             animatedSubviewDestinationFrame   = delegate.gateAnimator(self, animatedSubviewDestinationFrameForOperation: .Push)
             animatedSourceSubview?.alpha      = 1
             animatedSourceSubviewSnapshot     = animatedSourceSubview?.snapshotViewAfterScreenUpdates(false)
-            animatedSourceSubview?.alpha      = 0
+            
+            //animatedSourceSubview?.alpha      = 0
+            delegate.gateAnimator(self, animationWillStartForOperation: operation)
+            
             let upperSnapshotView             = snapshotViews!.upperSnapshotView
             let lowerSnapshotView             = snapshotViews!.lowerSnapshotView
             let animatedDestinationSubview    = delegate.gateAnimator(self, animatedSubviewForOperation: .Pop)
