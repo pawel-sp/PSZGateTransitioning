@@ -48,10 +48,11 @@ public class GateAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         animatedSourceSubview                         = delegate.gateAnimator(self, animatedSubviewForOperation: operation)
         animatedSubviewDestinationFrame               = delegate.gateAnimator(self, animatedSubviewDestinationFrameForOperation: operation)
         animatedSourceSubviewSnapshot                 = animatedSourceSubview?.snapshotViewAfterScreenUpdates(false)
-
+        
         toVC.view.alpha                               = 0
         containerView.insertSubview(toVC.view, belowSubview: fromVC.view)
-
+        prepareViewControllers(fromVC: fromVC, toVC: toVC, enabled: false)
+        
         if operation == .Push {
             snapshotViews  = delegate.snapShotViewsFrameForGateAnimator(self)
         }
@@ -63,10 +64,16 @@ public class GateAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         animationForOperation(operation, fromVC: fromVC, toVC: toVC, duration: duration) {
             self.delegate.gateAnimator(self, animationDidFinishForOperation: operation)
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled())
+            self.prepareViewControllers(fromVC: fromVC, toVC: toVC, enabled: true)
         }
     }
     
     // MARK: - Setup
+    
+    func prepareViewControllers(#fromVC:UIViewController, toVC:UIViewController, enabled:Bool) {
+        fromVC.navigationController?.view.userInteractionEnabled = enabled
+        toVC.navigationController?.view.userInteractionEnabled   = enabled
+    }
     
     func prepareContainerView(containerView:UIView, fromVC:UIViewController, forOperation operation:UINavigationControllerOperation) {
         switch operation {
