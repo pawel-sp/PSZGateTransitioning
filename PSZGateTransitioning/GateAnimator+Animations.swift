@@ -17,12 +17,12 @@ extension GateAnimator {
         case .Push:
             pushAnimation(fromVC: fromVC, toVC: toVC, snapshotViews: snapshotViews!, duration: duration - initialDelay, delay: initialDelay) {
                 self.animatedSourceSubviewSnapshot?.removeFromSuperview()
-                fromVC.view.transform = CGAffineTransformIdentity
+                fromVC.view.alpha = 1
                 completionBlock?()
             }
         case .Pop:
             popAnimation(fromVC: fromVC, toVC: toVC, snapshotViews: snapshotViews!, duration: duration, delay: 0) {
-                toVC.view.alpha                   = 1
+                toVC.view.alpha = 1
                 self.snapshotViews?.upperSnapshotView.removeFromSuperview()
                 self.snapshotViews?.lowerSnapshotView.removeFromSuperview()
                 self.animatedSourceSubviewSnapshot?.removeFromSuperview()
@@ -74,12 +74,12 @@ extension GateAnimator {
             snapshotViews.upperSnapshotView.alpha = 1
             snapshotViews.lowerSnapshotView.alpha = 1
             }, completion: { (_) -> Void in
-                fromVC.view.transform = CGAffineTransformMakeTranslation(UIScreen.mainScreen().bounds.width, 0)
+                fromVC.view.alpha = 0
         })
         
         UIView.animateKeyframesWithDuration(
-            duration,
-            delay: 0,
+            duration - initialDelay,
+            delay: initialDelay,
             options: UIViewKeyframeAnimationOptions.CalculationModeCubic,
             animations: { () -> Void in
                 

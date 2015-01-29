@@ -12,6 +12,8 @@
 	<dict>
 		<key>79E1D3403491D05842057611B0271BC45220D882</key>
 		<string>https://github.com/pawel-sp/PSZGateTransitioning.git</string>
+		<key>8A5FD2A80AD0431B04B62CFC573A6F22C17C692D</key>
+		<string>https://github.com/untitledkingdom/Hunt.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>iOS-Example.xcodeproj</string>
@@ -19,6 +21,8 @@
 	<dict>
 		<key>79E1D3403491D05842057611B0271BC45220D882</key>
 		<string>../..</string>
+		<key>8A5FD2A80AD0431B04B62CFC573A6F22C17C692D</key>
+		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/pawel-sp/PSZGateTransitioning.git</string>
@@ -28,6 +32,14 @@
 	<string>79E1D3403491D05842057611B0271BC45220D882</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>8A5FD2A80AD0431B04B62CFC573A6F22C17C692D</string>
+			<key>IDESourceControlWCCName</key>
+			<string></string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
