@@ -55,8 +55,16 @@ public class GateAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             
             // Setup
             
-//            animatedSubview           = delegate.gateAnimator(self, animatedSubviewForOperation: .Pop)
-//                        containerView.superview!.addSubview(animatedSubview!)
+//            animatedSubview = delegate.gateAnimator(self, animatedSubviewForOperation: .Pop)
+//            containerView.superview!.addSubview(animatedSubview!)
+//            
+//            if let frame = delegate.gateAnimator(self, animatedSubviewStartFrameForOperation: .Pop) {
+//                animatedSubview?.transform = CGAffineTransformMakeTranslation(
+//                    frame.origin.x,
+//                    frame.origin.y
+//                )
+//            }
+            
 //            UIView.animateWithDuration(duration, animations: { () -> Void in
 //                self.animatedSubview!.transform = CGAffineTransformMakeTranslation(0, 300)
 //            })

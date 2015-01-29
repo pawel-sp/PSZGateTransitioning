@@ -30,7 +30,7 @@ class TableViewController: UITableViewController, UINavigationControllerDelegate
         return GateAnimator(target: self)
         }()
     
-    var destinationViewController:DetailsViewController?
+    var destinationViewController:DetailsTableViewController?
     
     // MARK: - Lifecycle
     
@@ -48,7 +48,7 @@ class TableViewController: UITableViewController, UINavigationControllerDelegate
     // MARK: - Navigation
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let detailsViewController = segue.destinationViewController as? DetailsViewController {
+        if let detailsViewController = segue.destinationViewController as? DetailsTableViewController {
             detailsViewController.selectedRecord = data[tableView.indexPathForSelectedRow()?.row ?? 0]
             destinationViewController            = detailsViewController
         }
@@ -85,7 +85,6 @@ class TableViewController: UITableViewController, UINavigationControllerDelegate
     }
     
     func gateAnimator(gateAnimator:GateAnimator, animatedSubviewStartFrameForOperation operation:UINavigationControllerOperation) -> CGRect? {
-        
         switch operation {
         case .Push:
             if let selectedCell = tableView.selectedCell as? TableViewCell {
@@ -102,22 +101,17 @@ class TableViewController: UITableViewController, UINavigationControllerDelegate
     }
     
     func gateAnimator(gateAnimator: GateAnimator, animatedSubviewDestinationFrameForOperation operation: UINavigationControllerOperation) -> CGRect? {
-        
-        let statusBarHeight     = UIApplication.sharedApplication().statusBarFrame.height
-        let navigationBarHeight = navigationController?.navigationBar.frame.height ?? 0
-        
         switch operation {
-        case .Push: return destinationViewController?.textLabel.frame.rectByOffsetting(dx: 0, dy: navigationBarHeight + statusBarHeight + 3)
+        case .Push: return destinationViewController?.colorNameAbsoluteFrame
         case .Pop:  return nil
         default:    return nil
         }
     }
     
     func gateAnimator(gateAnimator: GateAnimator, animatedSubviewForOperation operation: UINavigationControllerOperation) -> UIView? {
-        
         switch operation {
         case .Push: return (tableView.selectedCell as? TableViewCell)?.bottomTitleLabel
-        case .Pop:  return destinationViewController?.textLabel
+        case .Pop:  return destinationViewController?.colorName
         default:    return nil
         }
     }

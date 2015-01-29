@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		553537E91A7A3F7E0090EF67 /* DetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553537E81A7A3F7E0090EF67 /* DetailsTableViewController.swift */; };
 		553CEA3F1A7934D4002EB3D2 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553CEA3E1A7934D4002EB3D2 /* TableViewCell.swift */; };
 		5599E22C1A781FE8008540CB /* PSZGateTransitioning.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5599E2271A781FD6008540CB /* PSZGateTransitioning.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		55DB02D01A7818880047C052 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DB02CF1A7818880047C052 /* AppDelegate.swift */; };
@@ -15,7 +16,6 @@
 		55DB02DA1A7818880047C052 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55DB02D81A7818880047C052 /* LaunchScreen.xib */; };
 		55DB02E61A7818880047C052 /* iOS_ExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DB02E51A7818880047C052 /* iOS_ExampleTests.swift */; };
 		55DB035E1A78195B0047C052 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DB035D1A78195B0047C052 /* TableViewController.swift */; };
-		55DB03601A7819710047C052 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DB035F1A7819710047C052 /* DetailsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +63,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		553537E81A7A3F7E0090EF67 /* DetailsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsTableViewController.swift; sourceTree = "<group>"; };
 		553CEA3E1A7934D4002EB3D2 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		5599E2211A781FD6008540CB /* PSZGateTransitioning.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = PSZGateTransitioning.xcodeproj; sourceTree = "<group>"; };
 		55DB02CA1A7818880047C052 /* iOS-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -75,7 +76,6 @@
 		55DB02E41A7818880047C052 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55DB02E51A7818880047C052 /* iOS_ExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS_ExampleTests.swift; sourceTree = "<group>"; };
 		55DB035D1A78195B0047C052 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
-		55DB035F1A7819710047C052 /* DetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,7 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				55DB035D1A78195B0047C052 /* TableViewController.swift */,
-				55DB035F1A7819710047C052 /* DetailsViewController.swift */,
+				553537E81A7A3F7E0090EF67 /* DetailsTableViewController.swift */,
 			);
 			name = "View controllers";
 			sourceTree = "<group>";
@@ -313,10 +313,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				553537E91A7A3F7E0090EF67 /* DetailsTableViewController.swift in Sources */,
 				55DB035E1A78195B0047C052 /* TableViewController.swift in Sources */,
 				553CEA3F1A7934D4002EB3D2 /* TableViewCell.swift in Sources */,
 				55DB02D01A7818880047C052 /* AppDelegate.swift in Sources */,
-				55DB03601A7819710047C052 /* DetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
