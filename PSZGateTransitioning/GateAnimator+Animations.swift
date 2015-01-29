@@ -17,7 +17,7 @@ extension GateAnimator {
         UIView.animateKeyframesWithDuration(
             duration,
             delay: 0,
-            options: UIViewKeyframeAnimationOptions.CalculationModeCubic,
+            options: UIViewKeyframeAnimationOptions.CalculationModePaced,
             animations: { () -> Void in
             
                 // source view
@@ -70,12 +70,12 @@ extension GateAnimator {
                 
                 // animated subview
                 UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 1, animations: { () -> Void in
-                    if self.animatedSubview != nil && self.animatedSubviewDestinationFrame != nil {
-                        self.animatedSubview!.transform = CGAffineTransformMakeTranslation(
-                            self.animatedSubviewDestinationFrame!.origin.x - self.animatedSubview!.frame.origin.x,
-                            self.animatedSubviewDestinationFrame!.origin.y - self.animatedSubview!.frame.origin.y
-                        )
-                    }
+//                    if self.animatedSourceSubview != nil && self.animatedSubviewDestinationFrame != nil {
+//                        self.animatedSourceSubview!.transform = CGAffineTransformMakeTranslation(
+//                            self.animatedSubviewDestinationFrame!.origin.x - self.animatedSourceSubview!.frame.origin.x,
+//                            self.animatedSubviewDestinationFrame!.origin.y - self.animatedSourceSubview!.frame.origin.y
+//                        )
+//                    }
                 })
                 
             }, completion: { (finished) -> Void in
