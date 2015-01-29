@@ -27,7 +27,7 @@ class TableViewController: UITableViewController, UINavigationControllerDelegate
     ]
     
     lazy var gateAnimator:GateAnimator = {
-        return GateAnimator()
+        return GateAnimator(target: self)
         }()
     
     var destinationViewController:UIViewController?
@@ -42,7 +42,6 @@ class TableViewController: UITableViewController, UINavigationControllerDelegate
     // MARK: - Setup
     
     func setup() {
-        gateAnimator.delegate          = self
         navigationController?.delegate = self
     }
     
@@ -70,12 +69,7 @@ class TableViewController: UITableViewController, UINavigationControllerDelegate
     
     // MARK: - UINavigationControllerDelegate
     
-    func navigationController(
-        navigationController: UINavigationController,
-        animationControllerForOperation operation: UINavigationControllerOperation,
-        fromViewController fromVC: UIViewController,
-        toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning?
-    {
+    func navigationController(navigationController: UINavigationController, animationControllerForOperation operation: UINavigationControllerOperation, fromViewController fromVC: UIViewController, toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
             gateAnimator.reversedDirection = operation == .Pop
             switch operation {
             case .Push: fallthrough
@@ -85,19 +79,46 @@ class TableViewController: UITableViewController, UINavigationControllerDelegate
     }
     
     // MARK: - GateAnimatorDelegate
+
+    func snapShotViewsFrameForGateAnimator(gateAnimator: GateAnimator) -> SnapshotViews {
+        return tableView.snapShotViews
+    }
     
-    func animatedCellSubViewForGateAnimator(gateAnimator: GateAnimator) -> UIView? {
-        if let selectedIndexPath = tableView.indexPathForSelectedRow() {
-            if let selectedCell = tableView.cellForRowAtIndexPath(selectedIndexPath) as? TableViewCell {
-                return selectedCell.bottomTitleLabel
+    func gateAnimator(gateAnimator:GateAnimator, animatedSubviewStartFrameForOperation operation:UINavigationControllerOperation) -> CGRect? {
+        
+        switch operation {
+        case .Push:
+            if let selectedCell = tableView.selectedCell as? TableViewCell {
+                return selectedCell.bottomTitleLabel.frame.rectByOffsetting(
+                    dx: 0,
+                    dy: selectedCell.frame.rectByOffsetting(dx: 0, dy: -tableView.contentOffset.y).origin.y
+                )
             }
+        case .Pop:  return nil
+        default:    return nil
         }
+        
         return nil
     }
     
-    func animatedCellSubViewDestinationFrame(gateAnimator: GateAnimator) -> CGRect {
-        let statusBarHeight           = UIApplication.sharedApplication().statusBarFrame.height
-        let navigationBarHeight       = navigationController?.navigationBar.frame.height ?? 0
-        return (destinationViewController as? DetailsViewController)?.textLabel.frame.rectByOffsetting(dx: 0, dy: navigationBarHeight + statusBarHeight + 4) ?? CGRectZero
+    func gateAnimator(gateAnimator: GateAnimator, animatedSubviewDestinationFrameForOperation operation: UINavigationControllerOperation) -> CGRect? {
+        
+        let statusBarHeight     = UIApplication.sharedApplication().statusBarFrame.height
+        let navigationBarHeight = navigationController?.navigationBar.frame.height ?? 0
+        
+        switch operation {
+        case .Push: return (destinationViewController as? DetailsViewController)?.textLabel.frame.rectByOffsetting(dx: 0, dy: navigationBarHeight + statusBarHeight + 4)
+        case .Pop:  return nil
+        default:    return nil
+        }
+    }
+    
+    func gateAnimator(gateAnimator: GateAnimator, animatedSubviewForOperation operation: UINavigationControllerOperation) -> UIView? {
+        
+        switch operation {
+        case .Push: return (tableView.selectedCell as? TableViewCell)?.bottomTitleLabel
+        case .Pop:  return nil
+        default:    return nil
+        }
     }
 }

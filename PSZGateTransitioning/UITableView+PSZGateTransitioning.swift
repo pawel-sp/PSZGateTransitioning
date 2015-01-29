@@ -8,31 +8,56 @@
 
 import Foundation
 
-extension UITableView {
+public extension UITableView {
     
-    var selectedCell:UITableViewCell? {
+    public var selectedCell:UITableViewCell? {
         if let selectedIndexPath = indexPathForSelectedRow() {
             return cellForRowAtIndexPath(selectedIndexPath)
         }
         return nil
     }
     
-    var selectedCellFrame:CGRect {
+    public var selectedCellFrame:CGRect {
         return selectedCell?.frame ?? CGRectZero
     }
     
-    func absoluteFrameForCellAtIndexPath(indexPath:NSIndexPath) -> CGRect {
+    public func absoluteFrameForCellAtIndexPath(indexPath:NSIndexPath) -> CGRect {
         if let cell = cellForRowAtIndexPath(indexPath) {
             return cell.frame.rectByOffsetting(dx: 0, dy: -contentOffset.y)
         }
         return CGRectZero
     }
     
-    var absoluteFrameForSelectedCell:CGRect {
+    public var absoluteFrameForSelectedCell:CGRect {
         if let selectedIndexPath = indexPathForSelectedRow() {
             return absoluteFrameForCellAtIndexPath(selectedIndexPath)
         }
         return CGRectZero
+    }
+    
+    public var snapShotViews:SnapshotViews {
+        let absoluteSelectedCellFrame   = absoluteFrameForSelectedCell
+        let cellBelowTheTableViewCenter = absoluteSelectedCellFrame.origin.y + absoluteSelectedCellFrame.height/2 > frame.height/2
+        
+        let upperSnapShotViewFrame = CGRectMake(
+            0,
+            contentOffset.y,
+            frame.width,
+            (cellBelowTheTableViewCenter ? absoluteSelectedCellFrame.origin.y : absoluteSelectedCellFrame.height + absoluteSelectedCellFrame.origin.y)
+        )
+        
+        let lowerSnapShotViewFrame = CGRectMake(
+            0,
+            contentOffset.y + upperSnapShotViewFrame.height,
+            frame.width,
+            frame.height - upperSnapShotViewFrame.height
+        )
+        
+        let upperSnapshotView = resizableSnapshotViewFromRect(upperSnapShotViewFrame, afterScreenUpdates: true, withCapInsets: UIEdgeInsetsZero)
+        let lowerSnapshotView = resizableSnapshotViewFromRect(lowerSnapShotViewFrame, afterScreenUpdates: true, withCapInsets: UIEdgeInsetsZero)
+        lowerSnapshotView.frame.offset(dx: 0, dy: upperSnapShotViewFrame.height)
+        
+        return (upperSnapshotView,lowerSnapshotView)
     }
     
 }

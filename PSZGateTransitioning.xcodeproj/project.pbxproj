@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		551409621A7960E20019097A /* UITableView+PSZGateTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551409611A7960E20019097A /* UITableView+PSZGateTransitioning.swift */; };
 		553CEA391A79280B002EB3D2 /* GateAnimator+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553CEA381A79280B002EB3D2 /* GateAnimator+Animations.swift */; };
-		553CEA3B1A792A34002EB3D2 /* GateAnimator+SnapShot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553CEA3A1A792A34002EB3D2 /* GateAnimator+SnapShot.swift */; };
 		553CEA411A79357A002EB3D2 /* GateAnimatorDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553CEA401A79357A002EB3D2 /* GateAnimatorDelegate.swift */; };
 		5599E2091A781FA7008540CB /* PSZGateTransitioning.h in Headers */ = {isa = PBXBuildFile; fileRef = 5599E2081A781FA7008540CB /* PSZGateTransitioning.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5599E20F1A781FA7008540CB /* PSZGateTransitioning.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5599E2031A781FA7008540CB /* PSZGateTransitioning.framework */; };
@@ -30,7 +29,6 @@
 /* Begin PBXFileReference section */
 		551409611A7960E20019097A /* UITableView+PSZGateTransitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+PSZGateTransitioning.swift"; sourceTree = "<group>"; };
 		553CEA381A79280B002EB3D2 /* GateAnimator+Animations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GateAnimator+Animations.swift"; sourceTree = "<group>"; };
-		553CEA3A1A792A34002EB3D2 /* GateAnimator+SnapShot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GateAnimator+SnapShot.swift"; sourceTree = "<group>"; };
 		553CEA401A79357A002EB3D2 /* GateAnimatorDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GateAnimatorDelegate.swift; sourceTree = "<group>"; };
 		5599E2031A781FA7008540CB /* PSZGateTransitioning.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PSZGateTransitioning.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5599E2071A781FA7008540CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -60,12 +58,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		551409601A7960CF0019097A /* Extensions */ = {
+		553537E61A7A2F510090EF67 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
 				551409611A7960E20019097A /* UITableView+PSZGateTransitioning.swift */,
 			);
-			name = Extensions;
+			name = Helpers;
 			sourceTree = "<group>";
 		};
 		553CEA431A793E7D002EB3D2 /* Gate Animator classes */ = {
@@ -74,7 +72,6 @@
 				5599E21F1A781FBE008540CB /* GateAnimator.swift */,
 				553CEA401A79357A002EB3D2 /* GateAnimatorDelegate.swift */,
 				553CEA381A79280B002EB3D2 /* GateAnimator+Animations.swift */,
-				553CEA3A1A792A34002EB3D2 /* GateAnimator+SnapShot.swift */,
 			);
 			name = "Gate Animator classes";
 			sourceTree = "<group>";
@@ -100,7 +97,7 @@
 		5599E2051A781FA7008540CB /* PSZGateTransitioning */ = {
 			isa = PBXGroup;
 			children = (
-				551409601A7960CF0019097A /* Extensions */,
+				553537E61A7A2F510090EF67 /* Helpers */,
 				5599E2081A781FA7008540CB /* PSZGateTransitioning.h */,
 				553CEA431A793E7D002EB3D2 /* Gate Animator classes */,
 				5599E2061A781FA7008540CB /* Supporting Files */,
@@ -243,7 +240,6 @@
 				553CEA411A79357A002EB3D2 /* GateAnimatorDelegate.swift in Sources */,
 				553CEA391A79280B002EB3D2 /* GateAnimator+Animations.swift in Sources */,
 				551409621A7960E20019097A /* UITableView+PSZGateTransitioning.swift in Sources */,
-				553CEA3B1A792A34002EB3D2 /* GateAnimator+SnapShot.swift in Sources */,
 				5599E2201A781FBE008540CB /* GateAnimator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

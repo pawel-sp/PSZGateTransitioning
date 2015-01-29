@@ -8,11 +8,14 @@
 
 import Foundation
 
+public typealias SnapshotViews = (upperSnapshotView:UIView, lowerSnapshotView:UIView)
+
 public protocol GateAnimatorDelegate {
     
-    // it must be cell's subview
-    func animatedCellSubViewForGateAnimator(gateAnimator:GateAnimator) -> UIView?
+    func snapShotViewsFrameForGateAnimator(gateAnimator:GateAnimator) -> SnapshotViews
     
-    func animatedCellSubViewDestinationFrame(gateAnimator:GateAnimator) -> CGRect
+    func gateAnimator(gateAnimator:GateAnimator, animatedSubviewStartFrameForOperation operation:UINavigationControllerOperation) -> CGRect?
+    func gateAnimator(gateAnimator:GateAnimator, animatedSubviewForOperation operation:UINavigationControllerOperation) -> UIView?
+    func gateAnimator(gateAnimator:GateAnimator, animatedSubviewDestinationFrameForOperation operation:UINavigationControllerOperation) -> CGRect?
     
 }

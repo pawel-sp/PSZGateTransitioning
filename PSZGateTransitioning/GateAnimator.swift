@@ -8,29 +8,31 @@
 
 import UIKit
 
-// MARK: - IMPORTANT!!!
-// source view controller MUST have type UITableViewController
-
 public class GateAnimator: NSObject, UIViewControllerAnimatedTransitioning {
    
     // MARK: - Internal properties
     
     var snapshotViews:SnapshotViews?
     let initialDelay = 0.1
-    lazy var cellSubviewDestinationFrame:CGRect = {
-        return self.delegate?.animatedCellSubViewDestinationFrame(self) ?? CGRectZero
-        }()
+    var cellSubviewDestinationFrame:CGRect?
     var animatedCellSubview:UIView?
 
     // MARK: - Pubic properties
     
     public var reversedDirection:Bool = false
-    public var delegate:GateAnimatorDelegate?
+    public var delegate:GateAnimatorDelegate
+    
+    // MARK: - Init
+    
+    public init(target:GateAnimatorDelegate) {
+        delegate = target
+        super.init()
+    }
     
     // MARK: - UIViewControllerAnimatedTransitioning
     
     public func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {
-        return 1.5
+        return reversedDirection ? 1.0 : 1.5
     }
     
     public func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
@@ -51,6 +53,13 @@ public class GateAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             let upperSnapshotView = snapshotViews!.upperSnapshotView
             let lowerSnapshotView = snapshotViews!.lowerSnapshotView
             
+            // Setup
+            animatedCellSubview         = delegate.gateAnimator(self, animatedSubviewForOperation: .Pop)
+            cellSubviewDestinationFrame = delegate.gateAnimator(self, animatedSubviewDestinationFrameForOperation: .Pop)
+            if animatedCellSubview != nil {
+                containerView.superview!.addSubview(animatedCellSubview!)
+            }
+            
             // Animation
             popAnimation(fromVC: fromVC, toVC: toVC, snapshotViews: snapshotViews!, duration: duration, delay: 0) {
                 toVC.view.alpha = 1
@@ -62,8 +71,9 @@ public class GateAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         } else {
             
             // Properties
-            let tableView                 = (fromVC as UITableViewController).tableView
-            snapshotViews                 = snapShotViewsForTableView((fromVC as UITableViewController).tableView)
+            snapshotViews                 = delegate.snapShotViewsFrameForGateAnimator(self)
+            cellSubviewDestinationFrame   = delegate.gateAnimator(self, animatedSubviewDestinationFrameForOperation: .Push)
+            animatedCellSubview           = delegate.gateAnimator(self, animatedSubviewForOperation: .Push)
             let upperSnapshotView         = snapshotViews!.upperSnapshotView
             let lowerSnapshotView         = snapshotViews!.lowerSnapshotView
             upperSnapshotView.alpha       = 0
@@ -75,17 +85,16 @@ public class GateAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             containerView.addSubview(snapshotViews!.upperSnapshotView)
             containerView.addSubview(snapshotViews!.lowerSnapshotView)
             
-            animatedCellSubview = delegate?.animatedCellSubViewForGateAnimator(self)
+            if let frame = delegate.gateAnimator(self, animatedSubviewStartFrameForOperation: .Push) {
+                animatedCellSubview?.frame  = frame
+            }
             if animatedCellSubview != nil {
-                animatedCellSubview!.frame.offset(
-                    dx: 0,
-                    dy: tableView.absoluteFrameForSelectedCell.origin.y
-                )
                 containerView.superview!.addSubview(animatedCellSubview!)
             }
             
             // Animation
             pushAnimation(fromVC: fromVC, toVC: toVC, snapshotViews: snapshotViews!, duration: duration - initialDelay, delay: initialDelay) {
+                self.animatedCellSubview?.removeFromSuperview()
                 fromVC.view.transform = CGAffineTransformIdentity
                 transitionContext.completeTransition(!transitionContext.transitionWasCancelled())
             }

@@ -68,12 +68,12 @@ extension GateAnimator {
                     toVC.view.alpha = 1
                 })
                 
-                // cell's subview
+                // animated subview
                 UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 1, animations: { () -> Void in
-                    if self.animatedCellSubview != nil {
+                    if self.animatedCellSubview != nil && self.cellSubviewDestinationFrame != nil {
                         self.animatedCellSubview!.transform = CGAffineTransformMakeTranslation(
-                            self.cellSubviewDestinationFrame.origin.x - self.animatedCellSubview!.frame.origin.x,
-                            self.cellSubviewDestinationFrame.origin.y - self.animatedCellSubview!.frame.origin.y
+                            self.cellSubviewDestinationFrame!.origin.x - self.animatedCellSubview!.frame.origin.x,
+                            self.cellSubviewDestinationFrame!.origin.y - self.animatedCellSubview!.frame.origin.y
                         )
                     }
                 })
@@ -81,8 +81,6 @@ extension GateAnimator {
             }, completion: { (finished) -> Void in
                 completionBlock?()
                 return
-//                fromVC.view.transform = CGAffineTransformIdentity
-//                transitionContext.completeTransition(!transitionContext.transitionWasCancelled())
             }
         )
 
