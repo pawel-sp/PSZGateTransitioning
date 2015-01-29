@@ -31,6 +31,7 @@ class TableViewController: UITableViewController, UINavigationControllerDelegate
         }()
     
     var destinationViewController:DetailsTableViewController?
+    var masterLabelFrame:CGRect?
     
     // MARK: - Lifecycle
     
@@ -88,22 +89,21 @@ class TableViewController: UITableViewController, UINavigationControllerDelegate
         switch operation {
         case .Push:
             if let selectedCell = tableView.selectedCell as? TableViewCell {
-                return selectedCell.bottomTitleLabel.frame.rectByOffsetting(
+                masterLabelFrame = selectedCell.bottomTitleLabel.frame.rectByOffsetting(
                     dx: 0,
                     dy: selectedCell.frame.rectByOffsetting(dx: 0, dy: -tableView.contentOffset.y).origin.y
                 )
             }
-        case .Pop:  return nil
+            return masterLabelFrame
+        case .Pop:  return destinationViewController?.colorNameAbsoluteFrame
         default:    return nil
         }
-        
-        return nil
     }
     
     func gateAnimator(gateAnimator: GateAnimator, animatedSubviewDestinationFrameForOperation operation: UINavigationControllerOperation) -> CGRect? {
         switch operation {
         case .Push: return destinationViewController?.colorNameAbsoluteFrame
-        case .Pop:  return nil
+        case .Pop:  return masterLabelFrame
         default:    return nil
         }
     }

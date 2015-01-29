@@ -36,8 +36,6 @@ class DetailsTableViewController: UITableViewController {
     // MARK: - Utilities
     
     var colorNameAbsoluteFrame:CGRect {
-        let statusBarHeight     = UIApplication.sharedApplication().statusBarFrame.height
-        let navigationBarHeight = navigationController?.navigationBar.frame.height ?? 0
-        return colorName.frame.rectByOffsetting(dx: 0, dy: topColorView.frame.height + statusBarHeight + navigationBarHeight)
+        return colorName.frame.rectByOffsetting(dx: 0, dy: topColorView.frame.height - tableView.contentOffset.y)
     }
 }

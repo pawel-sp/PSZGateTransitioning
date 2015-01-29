@@ -32,6 +32,16 @@ extension GateAnimator {
                     snapshotViews.lowerSnapshotView.transform = CGAffineTransformIdentity
                     snapshotViews.lowerSnapshotView.alpha     = 1
                 })
+                
+                // animated subview
+                UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 1, animations: { () -> Void in
+                    if self.animatedSourceSubviewSnapshot != nil && self.animatedSubviewDestinationFrame != nil {
+                        self.animatedSourceSubviewSnapshot!.transform = CGAffineTransformMakeTranslation(
+                            self.animatedSubviewDestinationFrame!.origin.x - self.animatedSourceSubviewSnapshot!.frame.origin.x,
+                            self.animatedSubviewDestinationFrame!.origin.y - self.animatedSourceSubviewSnapshot!.frame.origin.y
+                        )
+                    }
+                })
             
             }, completion: { (finished) -> Void in
                 completionBlock?()
@@ -70,12 +80,12 @@ extension GateAnimator {
                 
                 // animated subview
                 UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 1, animations: { () -> Void in
-//                    if self.animatedSourceSubview != nil && self.animatedSubviewDestinationFrame != nil {
-//                        self.animatedSourceSubview!.transform = CGAffineTransformMakeTranslation(
-//                            self.animatedSubviewDestinationFrame!.origin.x - self.animatedSourceSubview!.frame.origin.x,
-//                            self.animatedSubviewDestinationFrame!.origin.y - self.animatedSourceSubview!.frame.origin.y
-//                        )
-//                    }
+                    if self.animatedSourceSubviewSnapshot != nil && self.animatedSubviewDestinationFrame != nil {
+                        self.animatedSourceSubviewSnapshot!.transform = CGAffineTransformMakeTranslation(
+                            self.animatedSubviewDestinationFrame!.origin.x - self.animatedSourceSubviewSnapshot!.frame.origin.x,
+                            self.animatedSubviewDestinationFrame!.origin.y - self.animatedSourceSubviewSnapshot!.frame.origin.y
+                        )
+                    }
                 })
                 
             }, completion: { (finished) -> Void in
