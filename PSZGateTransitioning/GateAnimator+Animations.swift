@@ -70,10 +70,10 @@ extension GateAnimator {
                 
                 // animated subview
                 UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 1, animations: { () -> Void in
-                    if self.animatedCellSubview != nil && self.cellSubviewDestinationFrame != nil {
-                        self.animatedCellSubview!.transform = CGAffineTransformMakeTranslation(
-                            self.cellSubviewDestinationFrame!.origin.x - self.animatedCellSubview!.frame.origin.x,
-                            self.cellSubviewDestinationFrame!.origin.y - self.animatedCellSubview!.frame.origin.y
+                    if self.animatedSubview != nil && self.animatedSubviewDestinationFrame != nil {
+                        self.animatedSubview!.transform = CGAffineTransformMakeTranslation(
+                            self.animatedSubviewDestinationFrame!.origin.x - self.animatedSubview!.frame.origin.x,
+                            self.animatedSubviewDestinationFrame!.origin.y - self.animatedSubview!.frame.origin.y
                         )
                     }
                 })

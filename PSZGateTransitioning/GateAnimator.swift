@@ -14,8 +14,8 @@ public class GateAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     
     var snapshotViews:SnapshotViews?
     let initialDelay = 0.1
-    var cellSubviewDestinationFrame:CGRect?
-    var animatedCellSubview:UIView?
+    var animatedSubviewDestinationFrame:CGRect?
+    var animatedSubview:UIView?
 
     // MARK: - Pubic properties
     
@@ -54,10 +54,10 @@ public class GateAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             let lowerSnapshotView = snapshotViews!.lowerSnapshotView
             
             // Setup
-            animatedCellSubview         = delegate.gateAnimator(self, animatedSubviewForOperation: .Pop)
-            cellSubviewDestinationFrame = delegate.gateAnimator(self, animatedSubviewDestinationFrameForOperation: .Pop)
-            if animatedCellSubview != nil {
-                containerView.superview!.addSubview(animatedCellSubview!)
+            animatedSubview                 = delegate.gateAnimator(self, animatedSubviewForOperation: .Pop)
+            animatedSubviewDestinationFrame = delegate.gateAnimator(self, animatedSubviewDestinationFrameForOperation: .Pop)
+            if animatedSubview != nil {
+                containerView.superview!.addSubview(animatedSubview!)
             }
             
             // Animation
@@ -71,30 +71,30 @@ public class GateAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         } else {
             
             // Properties
-            snapshotViews                 = delegate.snapShotViewsFrameForGateAnimator(self)
-            cellSubviewDestinationFrame   = delegate.gateAnimator(self, animatedSubviewDestinationFrameForOperation: .Push)
-            animatedCellSubview           = delegate.gateAnimator(self, animatedSubviewForOperation: .Push)
-            let upperSnapshotView         = snapshotViews!.upperSnapshotView
-            let lowerSnapshotView         = snapshotViews!.lowerSnapshotView
-            upperSnapshotView.alpha       = 0
-            lowerSnapshotView.alpha       = 0
-            containerView.backgroundColor = fromVC.view.backgroundColor
-            toVC.view.alpha               = 0
+            snapshotViews                   = delegate.snapShotViewsFrameForGateAnimator(self)
+            animatedSubviewDestinationFrame = delegate.gateAnimator(self, animatedSubviewDestinationFrameForOperation: .Push)
+            animatedSubview                 = delegate.gateAnimator(self, animatedSubviewForOperation: .Push)
+            let upperSnapshotView           = snapshotViews!.upperSnapshotView
+            let lowerSnapshotView           = snapshotViews!.lowerSnapshotView
+            upperSnapshotView.alpha         = 0
+            lowerSnapshotView.alpha         = 0
+            containerView.backgroundColor   = fromVC.view.backgroundColor
+            toVC.view.alpha                 = 0
             
             // Setup
             containerView.addSubview(snapshotViews!.upperSnapshotView)
             containerView.addSubview(snapshotViews!.lowerSnapshotView)
             
             if let frame = delegate.gateAnimator(self, animatedSubviewStartFrameForOperation: .Push) {
-                animatedCellSubview?.frame  = frame
+                animatedSubview?.frame  = frame
             }
-            if animatedCellSubview != nil {
-                containerView.superview!.addSubview(animatedCellSubview!)
+            if animatedSubview != nil {
+                containerView.superview!.addSubview(animatedSubview!)
             }
             
             // Animation
             pushAnimation(fromVC: fromVC, toVC: toVC, snapshotViews: snapshotViews!, duration: duration - initialDelay, delay: initialDelay) {
-                self.animatedCellSubview?.removeFromSuperview()
+                self.animatedSubview?.removeFromSuperview()
                 fromVC.view.transform = CGAffineTransformIdentity
                 transitionContext.completeTransition(!transitionContext.transitionWasCancelled())
             }
