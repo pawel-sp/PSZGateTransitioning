@@ -133,9 +133,26 @@ class TableViewController: UITableViewController, UINavigationControllerDelegate
     
     func gateAnimator(gateAnimator: GateAnimator, animationWillStartForOperation operation: UINavigationControllerOperation) {
         switch operation {
-        case .Push: break
-        case .Pop:  break
+        case .Push: masterLabel?.alpha                         = 0
+                    destinationViewController?.colorName.alpha = 0
+        case .Pop:  destinationViewController?.colorName.alpha = 0
         default:    break
+        }
+    }
+    
+    func gateAnimator(gateAnimator:GateAnimator, animationDidFinishForOperation operation:UINavigationControllerOperation) {
+        switch operation {
+        case .Push: destinationViewController?.colorName.alpha = 1
+        case .Pop:  masterLabel?.alpha                         = 1
+        default:    break
+        }
+    }
+    
+    func gateAnimator(gateAnimator: GateAnimator, transitionDurationForOperation operation: UINavigationControllerOperation) -> NSTimeInterval {
+        switch operation {
+        case .Push: return 1.5
+        case .Pop:  return 1.0
+        default:    return 1.0
         }
     }
 }

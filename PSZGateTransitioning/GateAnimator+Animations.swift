@@ -12,8 +12,27 @@ typealias GateAnimationCompletionBlock = () -> ()
 
 extension GateAnimator {
 
+    func animationForOperation(operation:UINavigationControllerOperation, fromVC:UIViewController, toVC:UIViewController, duration: NSTimeInterval, completionBlock:GateAnimationCompletionBlock? = nil) {
+        switch operation {
+        case .Push:
+            pushAnimation(fromVC: fromVC, toVC: toVC, snapshotViews: snapshotViews!, duration: duration - initialDelay, delay: initialDelay) {
+                self.animatedSourceSubviewSnapshot?.removeFromSuperview()
+                fromVC.view.transform = CGAffineTransformIdentity
+                completionBlock?()
+            }
+        case .Pop:
+            popAnimation(fromVC: fromVC, toVC: toVC, snapshotViews: snapshotViews!, duration: duration, delay: 0) {
+                toVC.view.alpha                   = 1
+                self.snapshotViews?.upperSnapshotView.removeFromSuperview()
+                self.snapshotViews?.lowerSnapshotView.removeFromSuperview()
+                self.animatedSourceSubviewSnapshot?.removeFromSuperview()
+                completionBlock?()
+            }
+        default: break
+        }
+    }
+    
     func popAnimation(#fromVC:UIViewController, toVC:UIViewController, snapshotViews:SnapshotViews, duration:NSTimeInterval, delay:NSTimeInterval, completionBlock:GateAnimationCompletionBlock? = nil) {
-        
         UIView.animateKeyframesWithDuration(
             duration,
             delay: 0,
@@ -42,7 +61,6 @@ extension GateAnimator {
                         )
                     }
                 })
-            
             }, completion: { (finished) -> Void in
                 completionBlock?()
                 return

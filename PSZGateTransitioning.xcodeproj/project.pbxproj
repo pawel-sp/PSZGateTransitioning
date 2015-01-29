@@ -14,7 +14,6 @@
 		5599E20F1A781FA7008540CB /* PSZGateTransitioning.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5599E2031A781FA7008540CB /* PSZGateTransitioning.framework */; };
 		5599E2161A781FA7008540CB /* PSZGateTransitioningTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5599E2151A781FA7008540CB /* PSZGateTransitioningTests.swift */; };
 		5599E2201A781FBE008540CB /* GateAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5599E21F1A781FBE008540CB /* GateAnimator.swift */; };
-		559EFD841A7A60E3002C4924 /* GateAnimator+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559EFD831A7A60E3002C4924 /* GateAnimator+Utilities.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +37,6 @@
 		5599E2141A781FA7008540CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5599E2151A781FA7008540CB /* PSZGateTransitioningTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSZGateTransitioningTests.swift; sourceTree = "<group>"; };
 		5599E21F1A781FBE008540CB /* GateAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GateAnimator.swift; sourceTree = "<group>"; };
-		559EFD831A7A60E3002C4924 /* GateAnimator+Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GateAnimator+Utilities.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,7 +72,6 @@
 				5599E21F1A781FBE008540CB /* GateAnimator.swift */,
 				553CEA401A79357A002EB3D2 /* GateAnimatorDelegate.swift */,
 				553CEA381A79280B002EB3D2 /* GateAnimator+Animations.swift */,
-				559EFD831A7A60E3002C4924 /* GateAnimator+Utilities.swift */,
 			);
 			name = "Gate Animator classes";
 			sourceTree = "<group>";
@@ -240,7 +237,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				559EFD841A7A60E3002C4924 /* GateAnimator+Utilities.swift in Sources */,
 				553CEA411A79357A002EB3D2 /* GateAnimatorDelegate.swift in Sources */,
 				553CEA391A79280B002EB3D2 /* GateAnimator+Animations.swift in Sources */,
 				551409621A7960E20019097A /* UITableView+PSZGateTransitioning.swift in Sources */,

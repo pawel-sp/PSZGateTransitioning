@@ -13,8 +13,9 @@ public typealias SnapshotViews = (upperSnapshotView:UIView, lowerSnapshotView:UI
 public protocol GateAnimatorDelegate {
     
     func snapShotViewsFrameForGateAnimator(gateAnimator:GateAnimator) -> SnapshotViews
-    
+    func gateAnimator(gateAnimator:GateAnimator, transitionDurationForOperation operation:UINavigationControllerOperation) -> NSTimeInterval
     func gateAnimator(gateAnimator:GateAnimator, animationWillStartForOperation operation:UINavigationControllerOperation)
+    func gateAnimator(gateAnimator:GateAnimator, animationDidFinishForOperation operation:UINavigationControllerOperation)
     func gateAnimator(gateAnimator:GateAnimator, animatedSubviewStartFrameForOperation operation:UINavigationControllerOperation) -> CGRect?
     func gateAnimator(gateAnimator:GateAnimator, animatedSubviewForOperation operation:UINavigationControllerOperation) -> UIView?
     func gateAnimator(gateAnimator:GateAnimator, animatedSubviewDestinationFrameForOperation operation:UINavigationControllerOperation) -> CGRect?

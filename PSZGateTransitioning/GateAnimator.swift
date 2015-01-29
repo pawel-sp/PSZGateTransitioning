@@ -34,12 +34,11 @@ public class GateAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     // MARK: - UIViewControllerAnimatedTransitioning
     
     public func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {
-        return reversedDirection ? 5.0 : 5.5
+        return delegate.gateAnimator(self, transitionDurationForOperation: reversedDirection ? .Pop : .Push)
     }
     
     public func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
         
-        // Properties
         let containerView                             = transitionContext.containerView()
         let duration                                  = transitionDuration(transitionContext)
         let toVC                                      = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
@@ -47,81 +46,51 @@ public class GateAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         let operation:UINavigationControllerOperation = reversedDirection ? .Pop : .Push
 
         animatedSourceSubview                         = delegate.gateAnimator(self, animatedSubviewForOperation: operation)
-        
-        // Setup
-        toVC.view.alpha = 0
+        animatedSubviewDestinationFrame               = delegate.gateAnimator(self, animatedSubviewDestinationFrameForOperation: operation)
+        animatedSourceSubviewSnapshot                 = animatedSourceSubview?.snapshotViewAfterScreenUpdates(false)
+
+        toVC.view.alpha                               = 0
         containerView.insertSubview(toVC.view, belowSubview: fromVC.view)
- 
-        
-        
-        if reversedDirection && snapshotViews != nil {
 
-            // Properties
-            let upperSnapshotView = snapshotViews!.upperSnapshotView
-            let lowerSnapshotView = snapshotViews!.lowerSnapshotView
-            
-            // Setup
-            animatedSourceSubviewSnapshot = animatedSourceSubview?.snapshotViewAfterScreenUpdates(false)
-            //animatedSourceSubview?.alpha  = 0
-            animatedSubviewDestinationFrame   = delegate.gateAnimator(self, animatedSubviewDestinationFrameForOperation: .Pop)
-            
-            if let frame = delegate.gateAnimator(self, animatedSubviewStartFrameForOperation: .Pop) {
-                animatedSourceSubviewSnapshot?.frame  = frame
-            }
-            if animatedSourceSubviewSnapshot != nil {
-                containerView.superview!.addSubview(animatedSourceSubviewSnapshot!)
-            }
-            
-            // Animation
-            popAnimation(fromVC: fromVC, toVC: toVC, snapshotViews: snapshotViews!, duration: duration, delay: 0) {
-                toVC.view.alpha                   = 1
-                upperSnapshotView.removeFromSuperview()
-                lowerSnapshotView.removeFromSuperview()
-                self.animatedSourceSubviewSnapshot?.removeFromSuperview()
-                self.delegate.gateAnimator(self, animatedSubviewForOperation: .Push)?.alpha = 1
-                transitionContext.completeTransition(!transitionContext.transitionWasCancelled())
-            }
-            
-        } else {
+        if operation == .Push {
+            snapshotViews  = delegate.snapShotViewsFrameForGateAnimator(self)
+        }
+        
+        delegate.gateAnimator(self, animationWillStartForOperation: operation)
+        
+        prepareContainerView(containerView, fromVC: fromVC, forOperation: operation)
 
-            // Properties
-            animatedSourceSubview?.alpha      = 0
-            snapshotViews                     = delegate.snapShotViewsFrameForGateAnimator(self)
-            animatedSubviewDestinationFrame   = delegate.gateAnimator(self, animatedSubviewDestinationFrameForOperation: .Push)
-            animatedSourceSubview?.alpha      = 1
-            animatedSourceSubviewSnapshot     = animatedSourceSubview?.snapshotViewAfterScreenUpdates(false)
+        animationForOperation(operation, fromVC: fromVC, toVC: toVC, duration: duration) {
+            self.delegate.gateAnimator(self, animationDidFinishForOperation: operation)
+            transitionContext.completeTransition(!transitionContext.transitionWasCancelled())
+        }
+    }
+    
+    // MARK: - Setup
+    
+    func prepareContainerView(containerView:UIView, fromVC:UIViewController, forOperation operation:UINavigationControllerOperation) {
+        switch operation {
+        case .Push:
             
-            //animatedSourceSubview?.alpha      = 0
-            delegate.gateAnimator(self, animationWillStartForOperation: operation)
+            containerView.backgroundColor     = fromVC.view.backgroundColor
             
             let upperSnapshotView             = snapshotViews!.upperSnapshotView
             let lowerSnapshotView             = snapshotViews!.lowerSnapshotView
-            let animatedDestinationSubview    = delegate.gateAnimator(self, animatedSubviewForOperation: .Pop)
-            animatedDestinationSubview?.alpha = 0
             upperSnapshotView.alpha           = 0
             lowerSnapshotView.alpha           = 0
-            containerView.backgroundColor     = fromVC.view.backgroundColor
-            toVC.view.alpha                   = 0
-            
-            // Setup
             containerView.addSubview(snapshotViews!.upperSnapshotView)
             containerView.addSubview(snapshotViews!.lowerSnapshotView)
 
-            if let frame = delegate.gateAnimator(self, animatedSubviewStartFrameForOperation: .Push) {
-                animatedSourceSubviewSnapshot?.frame  = frame
-            }
-            if animatedSourceSubviewSnapshot != nil {
-                containerView.superview!.addSubview(animatedSourceSubviewSnapshot!)
-            }
             
-            // Animation
-            pushAnimation(fromVC: fromVC, toVC: toVC, snapshotViews: snapshotViews!, duration: duration - initialDelay, delay: initialDelay) {
-                animatedDestinationSubview?.alpha = 1
-                self.animatedSourceSubviewSnapshot?.removeFromSuperview()
-                fromVC.view.transform             = CGAffineTransformIdentity
-                transitionContext.completeTransition(!transitionContext.transitionWasCancelled())
-            }
-            
+        case .Pop:  break
+        default:    break
+        }
+        
+        if let frame = delegate.gateAnimator(self, animatedSubviewStartFrameForOperation: operation) {
+            animatedSourceSubviewSnapshot?.frame  = frame
+        }
+        if animatedSourceSubviewSnapshot != nil {
+            containerView.superview!.addSubview(animatedSourceSubviewSnapshot!)
         }
     }
 }
