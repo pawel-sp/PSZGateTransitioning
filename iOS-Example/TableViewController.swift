@@ -50,7 +50,7 @@ class TableViewController: UITableViewController, UINavigationControllerDelegate
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let detailsViewController = segue.destinationViewController as? DetailsTableViewController {
-            detailsViewController.selectedRecord = data[tableView.indexPathForSelectedRow()?.row ?? 0]
+            detailsViewController.selectedRecord = data[tableView.indexPathForSelectedRow?.row ?? 0]
             destinationViewController            = detailsViewController
         }
     }
@@ -62,7 +62,7 @@ class TableViewController: UITableViewController, UINavigationControllerDelegate
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell                   = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as TableViewCell
+        let cell                   = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! TableViewCell
         cell.bottomTitleLabel.text = data[indexPath.row].text
         cell.backgroundColor       = data[indexPath.row].color
         return cell
@@ -71,7 +71,7 @@ class TableViewController: UITableViewController, UINavigationControllerDelegate
     // MARK: - UITableViewDelegate
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        lastSelectedCell = tableView.cellForRowAtIndexPath(tableView.indexPathForSelectedRow()!) as? TableViewCell
+        lastSelectedCell = tableView.cellForRowAtIndexPath(tableView.indexPathForSelectedRow!) as? TableViewCell
     }
     
     // MARK: - UINavigationControllerDelegate
@@ -93,9 +93,9 @@ class TableViewController: UITableViewController, UINavigationControllerDelegate
     
     var absoluteMasterLabelFrame:CGRect? {
         if lastSelectedCell != nil {
-            return lastSelectedCell?.bottomTitleLabel.frame.rectByOffsetting(
+            return lastSelectedCell?.bottomTitleLabel.frame.offsetBy(
                 dx: 0,
-                dy: lastSelectedCell!.frame.rectByOffsetting(dx: 0, dy: -tableView.contentOffset.y).origin.y
+                dy: lastSelectedCell!.frame.offsetBy(dx: 0, dy: -tableView.contentOffset.y).origin.y
             )
         }
         return nil

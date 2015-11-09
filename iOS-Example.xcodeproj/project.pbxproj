@@ -14,7 +14,6 @@
 		55DB02D51A7818880047C052 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55DB02D31A7818880047C052 /* Main.storyboard */; };
 		55DB02D71A7818880047C052 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55DB02D61A7818880047C052 /* Images.xcassets */; };
 		55DB02DA1A7818880047C052 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55DB02D81A7818880047C052 /* LaunchScreen.xib */; };
-		55DB02E61A7818880047C052 /* iOS_ExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DB02E51A7818880047C052 /* iOS_ExampleTests.swift */; };
 		55DB035E1A78195B0047C052 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DB035D1A78195B0047C052 /* TableViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -39,13 +38,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 5599E2021A781FA7008540CB;
 			remoteInfo = PSZGateTransitioning;
-		};
-		55DB02E01A7818880047C052 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 55DB02C21A7818880047C052 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 55DB02C91A7818880047C052;
-			remoteInfo = "iOS-Example";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -72,7 +64,6 @@
 		55DB02D41A7818880047C052 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		55DB02D61A7818880047C052 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		55DB02D91A7818880047C052 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		55DB02DF1A7818880047C052 /* iOS-ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iOS-ExampleTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55DB02E41A7818880047C052 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55DB02E51A7818880047C052 /* iOS_ExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS_ExampleTests.swift; sourceTree = "<group>"; };
 		55DB035D1A78195B0047C052 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
@@ -80,13 +71,6 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		55DB02C71A7818880047C052 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		55DB02DC1A7818880047C052 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -127,7 +111,6 @@
 			isa = PBXGroup;
 			children = (
 				55DB02CA1A7818880047C052 /* iOS-Example.app */,
-				55DB02DF1A7818880047C052 /* iOS-ExampleTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -210,39 +193,18 @@
 			productReference = 55DB02CA1A7818880047C052 /* iOS-Example.app */;
 			productType = "com.apple.product-type.application";
 		};
-		55DB02DE1A7818880047C052 /* iOS-ExampleTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 55DB02EC1A7818880047C052 /* Build configuration list for PBXNativeTarget "iOS-ExampleTests" */;
-			buildPhases = (
-				55DB02DB1A7818880047C052 /* Sources */,
-				55DB02DC1A7818880047C052 /* Frameworks */,
-				55DB02DD1A7818880047C052 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				55DB02E11A7818880047C052 /* PBXTargetDependency */,
-			);
-			name = "iOS-ExampleTests";
-			productName = "iOS-ExampleTests";
-			productReference = 55DB02DF1A7818880047C052 /* iOS-ExampleTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		55DB02C21A7818880047C052 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastSwiftUpdateCheck = 0710;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Paweł Sporysz";
 				TargetAttributes = {
 					55DB02C91A7818880047C052 = {
 						CreatedOnToolsVersion = 6.1.1;
-					};
-					55DB02DE1A7818880047C052 = {
-						CreatedOnToolsVersion = 6.1.1;
-						TestTargetID = 55DB02C91A7818880047C052;
 					};
 				};
 			};
@@ -266,7 +228,6 @@
 			projectRoot = "";
 			targets = (
 				55DB02C91A7818880047C052 /* iOS-Example */,
-				55DB02DE1A7818880047C052 /* iOS-ExampleTests */,
 			);
 		};
 /* End PBXProject section */
@@ -299,13 +260,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		55DB02DD1A7818880047C052 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -320,14 +274,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		55DB02DB1A7818880047C052 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				55DB02E61A7818880047C052 /* iOS_ExampleTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -335,11 +281,6 @@
 			isa = PBXTargetDependency;
 			name = PSZGateTransitioning;
 			targetProxy = 5599E22A1A781FDF008540CB /* PBXContainerItemProxy */;
-		};
-		55DB02E11A7818880047C052 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 55DB02C91A7818880047C052 /* iOS-Example */;
-			targetProxy = 55DB02E01A7818880047C052 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -383,6 +324,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -446,6 +388,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "iOS-Example/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "PSZ.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -456,41 +399,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "iOS-Example/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "PSZ.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		55DB02ED1A7818880047C052 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "iOS-ExampleTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iOS-Example.app/iOS-Example";
-			};
-			name = Debug;
-		};
-		55DB02EE1A7818880047C052 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "iOS-ExampleTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iOS-Example.app/iOS-Example";
 			};
 			name = Release;
 		};
@@ -511,15 +421,6 @@
 			buildConfigurations = (
 				55DB02EA1A7818880047C052 /* Debug */,
 				55DB02EB1A7818880047C052 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		55DB02EC1A7818880047C052 /* Build configuration list for PBXNativeTarget "iOS-ExampleTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				55DB02ED1A7818880047C052 /* Debug */,
-				55DB02EE1A7818880047C052 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

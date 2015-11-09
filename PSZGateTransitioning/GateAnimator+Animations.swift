@@ -32,7 +32,7 @@ extension GateAnimator {
         }
     }
     
-    func popAnimation(#fromVC:UIViewController, toVC:UIViewController, snapshotViews:SnapshotViews, duration:NSTimeInterval, delay:NSTimeInterval, completionBlock:GateAnimationCompletionBlock? = nil) {
+    func popAnimation(fromVC fromVC:UIViewController, toVC:UIViewController, snapshotViews:SnapshotViews, duration:NSTimeInterval, delay:NSTimeInterval, completionBlock:GateAnimationCompletionBlock? = nil) {
         UIView.animateKeyframesWithDuration(
             duration,
             delay: 0,
@@ -68,7 +68,7 @@ extension GateAnimator {
         )
     }
     
-    func pushAnimation(#fromVC:UIViewController, toVC:UIViewController, snapshotViews:SnapshotViews, duration:NSTimeInterval, delay:NSTimeInterval, completionBlock:GateAnimationCompletionBlock? = nil) {
+    func pushAnimation(fromVC fromVC:UIViewController, toVC:UIViewController, snapshotViews:SnapshotViews, duration:NSTimeInterval, delay:NSTimeInterval, completionBlock:GateAnimationCompletionBlock? = nil) {
         // it removes blinking bug
         UIView.animateWithDuration(initialDelay, animations: { () -> Void in
             snapshotViews.upperSnapshotView.alpha = 1

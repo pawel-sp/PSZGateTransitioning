@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "79E1D3403491D05842057611B0271BC45220D882",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "79E1D3403491D05842057611B0271BC45220D882" : 0,
+    "8A5FD2A80AD0431B04B62CFC573A6F22C17C692D" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "74DD7292-5A40-44FF-BB98-3E7E3EF810D6",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "79E1D3403491D05842057611B0271BC45220D882" : "PSZGateTransitioning",
+    "8A5FD2A80AD0431B04B62CFC573A6F22C17C692D" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "iOS-Example",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "iOS-Example.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/pawel-sp\/PSZGateTransitioning.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "79E1D3403491D05842057611B0271BC45220D882"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/untitledkingdom\/Hunt.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "8A5FD2A80AD0431B04B62CFC573A6F22C17C692D"
+    }
+  ]
+}

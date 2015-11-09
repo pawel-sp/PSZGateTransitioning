@@ -33,7 +33,7 @@ public class GateAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     
     // MARK: - UIViewControllerAnimatedTransitioning
     
-    public func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {
+    public func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
         return delegate.gateAnimator(self, transitionDurationForOperation: reversedDirection ? .Pop : .Push)
     }
     
@@ -50,7 +50,7 @@ public class GateAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         animatedSourceSubviewSnapshot                 = animatedSourceSubview?.snapshotViewAfterScreenUpdates(false)
         
         toVC.view.alpha                               = 0
-        containerView.insertSubview(toVC.view, belowSubview: fromVC.view)
+        containerView?.insertSubview(toVC.view, belowSubview: fromVC.view)
         prepareViewControllers(fromVC: fromVC, toVC: toVC, enabled: false)
         
         if operation == .Push {
@@ -70,23 +70,23 @@ public class GateAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     
     // MARK: - Setup
     
-    func prepareViewControllers(#fromVC:UIViewController, toVC:UIViewController, enabled:Bool) {
+    func prepareViewControllers(fromVC fromVC:UIViewController, toVC:UIViewController, enabled:Bool) {
         fromVC.navigationController?.view.userInteractionEnabled = enabled
         toVC.navigationController?.view.userInteractionEnabled   = enabled
     }
     
-    func prepareContainerView(containerView:UIView, fromVC:UIViewController, forOperation operation:UINavigationControllerOperation) {
+    func prepareContainerView(containerView:UIView?, fromVC:UIViewController, forOperation operation:UINavigationControllerOperation) {
         switch operation {
         case .Push:
             
-            containerView.backgroundColor     = fromVC.view.backgroundColor
+            containerView?.backgroundColor     = fromVC.view.backgroundColor
             
             let upperSnapshotView             = snapshotViews!.upperSnapshotView
             let lowerSnapshotView             = snapshotViews!.lowerSnapshotView
             upperSnapshotView.alpha           = 0
             lowerSnapshotView.alpha           = 0
-            containerView.addSubview(snapshotViews!.upperSnapshotView)
-            containerView.addSubview(snapshotViews!.lowerSnapshotView)
+            containerView?.addSubview(snapshotViews!.upperSnapshotView)
+            containerView?.addSubview(snapshotViews!.lowerSnapshotView)
 
             
         case .Pop:  break
@@ -97,7 +97,7 @@ public class GateAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             animatedSourceSubviewSnapshot?.frame  = frame
         }
         if animatedSourceSubviewSnapshot != nil {
-            containerView.superview!.addSubview(animatedSourceSubviewSnapshot!)
+            containerView?.superview?.addSubview(animatedSourceSubviewSnapshot!)
         }
     }
 }

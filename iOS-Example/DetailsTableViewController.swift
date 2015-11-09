@@ -36,6 +36,6 @@ class DetailsTableViewController: UITableViewController {
     // MARK: - Utilities
     
     var colorNameAbsoluteFrame:CGRect {
-        return colorName.frame.rectByOffsetting(dx: 0, dy: topColorView.frame.height - tableView.contentOffset.y)
+        return colorName.frame.offsetBy(dx: 0, dy: topColorView.frame.height - tableView.contentOffset.y)
     }
 }

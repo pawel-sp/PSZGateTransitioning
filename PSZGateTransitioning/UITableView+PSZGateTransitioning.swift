@@ -11,7 +11,7 @@ import Foundation
 public extension UITableView {
     
     public var selectedCell:UITableViewCell? {
-        if let selectedIndexPath = indexPathForSelectedRow() {
+        if let selectedIndexPath = indexPathForSelectedRow {
             return cellForRowAtIndexPath(selectedIndexPath)
         }
         return nil
@@ -23,13 +23,13 @@ public extension UITableView {
     
     public func absoluteFrameForCellAtIndexPath(indexPath:NSIndexPath) -> CGRect {
         if let cell = cellForRowAtIndexPath(indexPath) {
-            return cell.frame.rectByOffsetting(dx: 0, dy: -contentOffset.y)
+            return cell.frame.offsetBy(dx: 0, dy: -contentOffset.y)
         }
         return CGRectZero
     }
     
     public var absoluteFrameForSelectedCell:CGRect {
-        if let selectedIndexPath = indexPathForSelectedRow() {
+        if let selectedIndexPath = indexPathForSelectedRow {
             return absoluteFrameForCellAtIndexPath(selectedIndexPath)
         }
         return CGRectZero
@@ -55,7 +55,7 @@ public extension UITableView {
         
         let upperSnapshotView = resizableSnapshotViewFromRect(upperSnapShotViewFrame, afterScreenUpdates: true, withCapInsets: UIEdgeInsetsZero)
         let lowerSnapshotView = resizableSnapshotViewFromRect(lowerSnapShotViewFrame, afterScreenUpdates: true, withCapInsets: UIEdgeInsetsZero)
-        lowerSnapshotView.frame.offset(dx: 0, dy: upperSnapShotViewFrame.height)
+        lowerSnapshotView.frame.offsetInPlace(dx: 0, dy: upperSnapShotViewFrame.height)
         
         return (upperSnapshotView,lowerSnapshotView)
     }
